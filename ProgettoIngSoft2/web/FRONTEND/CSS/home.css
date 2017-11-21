@@ -14,3 +14,11 @@ and open the template in the editor.
     border: none;
 }
 
+.justify-content-center{
+    margin: auto;
+    width: 400px;
+    height: 400px;
+    top: 50%;
+    left: 50%;
+}
+
