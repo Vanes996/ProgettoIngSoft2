@@ -10,5 +10,7 @@ and open the template in the editor.
 
 .col-md-4 {
     text-align: center;
-    
+    position: relative;
+    top: 60px;
+    left: 5px;
 }

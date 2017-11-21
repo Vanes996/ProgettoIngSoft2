@@ -22,3 +22,12 @@ and open the template in the editor.
     left: 50%;
 }
 
+.ul {
+    text-align: left;
+}
+
+
+#srch-term {
+    width: 500px;
+}
+
