@@ -1,5 +1,5 @@
-// SERVER
-// Prende la domanda inserita dall'utente nella barra di ricerca (per adesso la voce non funziona)
+// SERVER 
+// Prende  la domanda inserita dall'utente nella barra di ricerca (per adesso la voce non funziona)
 // e stampa sulla console la risposta dell'agent
 // Qua il server si collega ad un piccolo agent fatto solo per provare 
 // Quando marco avrà l'agent completo cambio gli access token
