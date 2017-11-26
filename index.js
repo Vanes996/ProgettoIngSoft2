@@ -9,8 +9,8 @@ var express = require('express');
 var apiai = require('apiai');
 
 var app = express();
-// client access token da cambiare con quello di Marco
-var dia = apiai('22cbaa8be91b4ee887ffb7b161cc1c7c')
+// client access token da cambiare con il mio
+var dia = apiai('c22a4fe6d883458e8063bc34327996d5');
 
 
 //handle get req on /question
@@ -26,16 +26,30 @@ app.get('/question', function (req, res) {
     // Richiesta 
     // sessionId da cambiare con quello di Marco
     var request = dia.textRequest(q, {
-    	sessionId: 'my-weather-a9d7c'
+    	sessionId: 'unibot-437c3'
     });
     // OCCHIO AL CALLBACK HELL BISOGNA ASSICURARSI CHE QUESTO FINISCA PRIMA
 
     request.on('response', function(response) {
     	 // Devo prendere la risposta vera e propria
-
-   		 console.log(response.result.fulfillment.speech)
+         // 24/11 Sostituito l'agent placeholder con il io funziona
+         var ris = response.result.fulfillment.speech;
+   		 console.log(ris);
 
          // cercare la risposta nel db
+         if (ris == "LAUREA") {
+            console.log("cercherò nel database le risposte riguardanti la LAUREA");
+         }
+         else if (ris == "PIANO") {
+            console.log("cercherò nel database le risposte riguardanti il PIANO");
+         }
+         else if (ris == "ISEE") {
+            console.log("cercherò nel database le risposte riguardanti l'ISEE");
+         }
+         else {
+            console.log("non ci arriva mai in teoria ma lo metto per il futuro");
+         }
+
 	});
 
 	request.on('error', function(error) {
