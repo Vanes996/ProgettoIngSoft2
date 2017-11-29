@@ -22,6 +22,7 @@ var Laurea_Question = require("./Laurea_Question.js");
 var Piano_Question = require("./Piano_Question.js");
 
 //handle get req on /question
+// Due funzioni annodate c'è un problema di callback la funzione esterna finsice prima della funzione interna TO DO
 app.get('/question', function (req, res) {    
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
@@ -36,7 +37,6 @@ app.get('/question', function (req, res) {
     var request = dia.textRequest(q, {
     	sessionId: 'unibot-437c3'
     });
-    // OCCHIO AL CALLBACK HELL BISOGNA ASSICURARSI CHE QUESTO FINISCA PRIMA
 
     // HO PROVATO A CREARE A MANO LE DOMANDE E QUANDO FA IL FIND NON LE TROVA
     // ALLA PEGGIO LE INSERIAMO TUTTE VIA CODICE
@@ -64,6 +64,8 @@ app.get('/question', function (req, res) {
                 if (err) {
                     console.log(err);
                 }
+                // OK COSI FUNZIA
+                res.end(JSON.stringify(questions));
                 console.log(questions);
             });
          }
@@ -97,8 +99,6 @@ app.get('/question', function (req, res) {
 	});
 	request.end();
 
-    //send response
-    res.end();
 });
 
 
