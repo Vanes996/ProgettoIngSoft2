@@ -14,11 +14,15 @@ Serve la struttura della pagina web che andrà a contenere le domande cosi da ri
 mostrarla all'utente
 Bisogna guardare come caricare una pagina web e modificarla via codice
 Btw ogni domanda è un JSON, la variabile questions è una lista di JSON
+
 Ogni domanda contiene:
-	value : String
-	answer : String
-	rating : String
+	 value : String
+	 answer : String
+	 rating : String
 
 Value è l'effettiva stringa corrispondente alla domanda
 Answer è la risposta
 Rating è il numero di click fatto su quella domanda (aumenta ogni volta che viene cliccata la domanda)
+
+Non so perche non vada a capo spero si capisca comunque
+
