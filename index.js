@@ -15,6 +15,8 @@ var app = express();
 // client access token da cambiare con il mio
 var dia = apiai('c22a4fe6d883458e8063bc34327996d5');
 
+var fs = require('fs');
+
 
 // Quello che sto per fare è un po una porcata a non so come altro fare
 var ISEE_Question = require("./ISEE_Question.js");
@@ -22,7 +24,6 @@ var Laurea_Question = require("./Laurea_Question.js");
 var Piano_Question = require("./Piano_Question.js");
 
 //handle get req on /question
-// Due funzioni annodate c'è un problema di callback la funzione esterna finsice prima della funzione interna TO DO
 app.get('/question', function (req, res) {    
     res.statusCode = 200;
     res.setHeader('Content-Type', 'text/plain');
