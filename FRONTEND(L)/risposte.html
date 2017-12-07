@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" type="text/css" href="template.css">  
+      <meta charset="utf-8">
+      <title> Risposta </title>
+   </head>
+   <body>
+       <a href="home.html">
+           <img src="./img/altosx.jpg">
+       </a>
+       <p id="topic"> <b></b></p>
+       <div class="container1">       
+           <div>           
+               <b>(:domanda1:)</b>          
+               <br>
+               <textarea float="left" rows="20" cols="100">(:risposta1:)</textarea><br> 
+               <video width="320" height="240" controls>
+                   <source src="guida.mp4" type="video/mp4">  <!--placeholder bisogna vedere come caricare i video dal database-->
+                   <source src="guida.ogg" type="video/ogg">  <!--placeholder-->
+                   Your browser does not support the video tag.
+               </video>
+               <br>           
+               <br>       
+           </div>
+           <!--  roba vecchia può tornare utile
+           <script>        
+               function Titolo(){            
+                   //alert(location.search.substr(3));            
+                   return location.search.substr(3);        
+               }       
+               document.getElementById("topic").innerHTML = Titolo();
+           </script>-->
+       </div>
+</html>

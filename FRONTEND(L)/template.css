@@ -1,0 +1,25 @@
+img {
+    padding: 5px;
+}
+
+img:hover {
+    box-shadow: 0 0 2px 1px #991640;
+}
+
+
+div.container1 {
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+div.bottompage{    
+    position: absolute;
+    bottom: 0;
+}
+
+.bigtext {
+    height:400px;
+}

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+   <head>
+      <link rel="stylesheet" type="text/css" href="template.css">  
+      <meta charset="utf-8">
+      <title> Titolo() </title>
+   </head>
+   <body>
+       <a href="home.html">
+           <img src="./img/altosx.jpg">
+       </a>
+       <p id="topic"> <b></b></p>
+       <div class="container1">
+           <div>
+               <a href="risposte.html"><b>(:domanda1:)</b></a>
+               <br>
+               <br>
+           </div>
+           <div>
+               <a href="risposte.html"><b>(:domanda2:)</b></a>
+               <br>
+               <br>
+           </div>
+           <div>
+               <a href="risposte.html"><b>(:domanda3:)</b></a>
+               <br>
+               <br>
+           </div>
+       </div>
+       <br><br><br><br><br><br>
+       <div id="bottompage">       
+           <a href="segreteria.html"><p>Non è quello che stavi cercando?</p></a>
+       </div>
+    </body>
+    <script>
+        function Titolo(){
+            //alert(location.search.substr(3));
+            return location.search.substr(3);
+        }
+        document.getElementById("topic").innerHTML = Titolo();
+
+    </script>
+</html>
