@@ -56,9 +56,11 @@ app.get('/question', function (req, res) {
          if (ris == "LAUREA") {
             console.log("cercherò nel database le risposte riguardanti la Laurea");
             /*var domanda = new Laurea_Question();
-            domanda.value = "questa è la prima domanda";
-            domanda.answer = "questa è la risposta alla prima domanda";
-            domanda.rating = "1 è una stringa dopo devo cambiare";
+            domanda.value = "domanda_3";
+            domanda.answer = "risposta_3";
+            domanda.rating = "rating_3";
+            domanda.nId = "3";
+            domanda.topic = "Laurea";
             domanda.save(function(err) {
                 if (err) {
                     console.log("errore");
