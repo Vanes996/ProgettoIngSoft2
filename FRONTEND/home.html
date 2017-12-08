@@ -4,17 +4,26 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 <body>
+
 	<div class="container">
 		<img class="centered" src="./img/logo_400x400.jpg">
-
-		<div class="container1"> 	
-			<form action="http://127.0.0.1:80/question" method='get'>
-  				<input type="text" name="questionValue">
-  				<input type="submit" value="send">
-			</form>	
-
-		</div>
 	</div>
+		
+	<div class="container1"> 	
+		<form action="http://127.0.0.1:80/question" method='get'>
+  			<input type="text" name="questionValue" size="50">
+  			<input type="submit" value="send">
+		</form>	
+
+	</div>
+    <div class="bottoni">
+		<form action="http://127.0.0.1:80/search" method='get'>
+			<input type="submit" value="LAUREA">
+			<input type="submit" value="ISEE">
+			<input type="submit" value="PIANO DI STUDIO">
+		</form>
+    </div>
+	
 
 </body>
 </html>
