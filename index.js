@@ -15,7 +15,11 @@ var app = express();
 // client access token da cambiare con il mio
 var dia = apiai('c22a4fe6d883458e8063bc34327996d5');
 
-var fs = require('fs');
+
+//for templates 06/12
+var bind = require('bind');
+
+var ObjectId = require('mongoose').Schema.ObjectId
 
 
 // Quello che sto per fare è un po una porcata a non so come altro fare
@@ -66,7 +70,18 @@ app.get('/question', function (req, res) {
                     console.log(err);
                 }
                 // OK COSI FUNZIA
-                res.end(JSON.stringify(questions));
+                // res.end(JSON.stringify(questions));
+                //res.end(questions[0].value);
+     
+                bind.toFile('./FRONTEND/search.tpl', 
+                	{
+                		domande : questions,
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
                 console.log(questions);
             });
          }
@@ -102,6 +117,98 @@ app.get('/question', function (req, res) {
 
 });
 
+// Handle get req on /LAUREA
+app.get('/LAUREA', function(req, res) {
+	Laurea_Question.find(function(err, questions) {
+                if (err) {
+                    console.log(err);
+                }
+                // OK COSI FUNZIA
+                // res.end(JSON.stringify(questions));
+                //res.end(questions[0].value);
+                bind.toFile('./FRONTEND/search.tpl', 
+                	{
+                		domanda1 : questions[0].value
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
+                console.log(questions);
+    });
+});
+
+// Handle get req on /LAUREA
+app.get('/ISEE', function(req, res) {
+	ISEE_Question.find(function(err, questions) {
+                if (err) {
+                    console.log(err);
+                }
+                // OK COSI FUNZIA
+                // res.end(JSON.stringify(questions));
+                //res.end(questions[0].value);
+                bind.toFile('./FRONTEND/search.tpl', 
+                	{
+
+                		// guess what qua non va perche non ci sono doande nel database
+                		domanda1 : questions[0].value
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
+                console.log(questions);
+    });
+});
+
+// Handle get req on /LAUREA
+app.get('/PIANO', function(req, res) {
+	Piano_Question.find(function(err, questions) {
+                if (err) {
+                    console.log(err);
+                }
+                // OK COSI FUNZIA
+                // res.end(JSON.stringify(questions));
+                //res.end(questions[0].value);
+                bind.toFile('./FRONTEND/search.tpl', 
+                	{
+                		domanda1 : questions[0].value
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
+                console.log(questions);
+    });
+});
+
+
+
+app.get('/risposta', function(req, res) {
+	var id = req.query.id;
+	var topic = req.query.topic;
+
+	if (topic == "Laurea") {
+		// INtanto faccio nel modo sporco ovvero cerco nel database con un for 
+		Laurea_Question.find(function(err, questions) {
+			if (err) {
+				console.log(err);
+			}
+			// Ciclo
+			// da modificare
+			for (var i = 0; i < questions.length; i++) {
+				if (questions[i].nId == id) {
+					res.end(questions[i].answer);
+				}
+			} 
+		});
+	}
+});
+
+
 
 //listen in a specific port
 // Magari dopo si puo pensare di cambiare la porta 
@@ -109,3 +216,4 @@ app.listen((process.env.PORT || 80));
 
 //check status
 console.log('Server running at http://localhost:80/');
+

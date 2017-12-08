@@ -12,7 +12,9 @@ var Schema = mongoose.Schema;
 var QuestionSchema = new Schema({
 	value : String,
 	answer : String,
-	rating : String
+	rating : String,
+	nId : String,
+	topic : String
 });
 
 module.exports = mongoose.model('laurea_questions', QuestionSchema);
