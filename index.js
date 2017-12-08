@@ -55,6 +55,7 @@ app.get('/question', function (req, res) {
          // cercare la risposta nel db
          if (ris == "LAUREA") {
             console.log("cercherò nel database le risposte riguardanti la Laurea");
+
             /*var domanda = new Laurea_Question();
             domanda.value = "domanda_3";
             domanda.answer = "risposta_3";
@@ -120,7 +121,7 @@ app.get('/question', function (req, res) {
 });
 
 // Handle get req on /LAUREA
-app.get('/LAUREA', function(req, res) {
+app.get('/laurea', function(req, res) {
 	Laurea_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -128,9 +129,9 @@ app.get('/LAUREA', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
-                bind.toFile('./FRONTEND/search.tpl', 
+                bind.toFile('./FRONTEND/search.html', 
                 	{
-                		domanda1 : questions[0].value
+                		domande : questions
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -142,7 +143,7 @@ app.get('/LAUREA', function(req, res) {
 });
 
 // Handle get req on /LAUREA
-app.get('/ISEE', function(req, res) {
+app.get('/isee', function(req, res) {
 	ISEE_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -153,8 +154,7 @@ app.get('/ISEE', function(req, res) {
                 bind.toFile('./FRONTEND/search.tpl', 
                 	{
 
-                		// guess what qua non va perche non ci sono doande nel database
-                		domanda1 : questions[0].value
+                		domande : questions
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -166,7 +166,7 @@ app.get('/ISEE', function(req, res) {
 });
 
 // Handle get req on /LAUREA
-app.get('/PIANO', function(req, res) {
+app.get('/piano', function(req, res) {
 	Piano_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -206,6 +206,32 @@ app.get('/risposta', function(req, res) {
 					res.end(questions[i].answer);
 				}
 			} 
+		});
+	}
+
+	if (topic == "Isee") {
+		ISEE_Question.find(function(err, questions) {
+			if (err) {
+				console.log(err);
+			}
+			for (var i = 0; i < questions.length; i++) {
+				if (questions[i].nId == id) {
+					res.end(questions[i].answer);
+				}
+			}
+		});
+	}
+
+	if (topic == "Piano") {
+		Piano_Question.find(function(err, questions) {
+			if (err) {
+				console.log(err);
+			}
+			for (var i = 0; i < question.length; i++) {
+				if (questions[i].nId == id) {
+					res.end(questions[i].answer);
+				}
+			}
 		});
 	}
 });
