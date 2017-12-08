@@ -76,7 +76,7 @@ app.get('/question', function (req, res) {
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
      
-                bind.toFile('./FRONTEND/search.tpl', 
+                bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
                 	},
