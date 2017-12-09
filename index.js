@@ -89,20 +89,68 @@ app.get('/question', function (req, res) {
             });
          }
          else if (ris == "PIANO") {
+
             console.log("cercherò nel database le risposte riguardanti il PIANO");
+            /*var domanda = new Piano_Question
+            domanda.value = "domanda_1";
+            domanda.answer = "risposta_1";
+            domanda.rating = "rating_1";
+            domanda.nId = "1";
+            domanda.topic = "Piano";
+            domanda.save(function(err) {
+                if (err) {
+                    console.log("errore");
+                }
+                console.log("domanda creata in che collection finirà?");
+            })
+            */
             Piano_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
                 }
+                 bind.toFile('./FRONTEND/search.html', 
+                	{
+                		domande : questions,
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
                 console.log(questions);
             });
          }
          else if (ris == "ISEE") {
             console.log("cercherò nel database le risposte riguardanti l'ISEE");
+            /*var domanda = new ISEE_Question();
+            domanda.value = "domanda_1";
+            domanda.answer = "risposta_1";
+            domanda.rating = "rating_1";
+            domanda.nId = "1";
+            domanda.topic = "Isee";
+            domanda.save(function(err) {
+                if (err) {
+                    console.log("errore");
+                }
+                console.log("domanda creata in che collection finirà?");
+            })*/
             ISEE_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
                 }
+                // OK COSI FUNZIA
+                // res.end(JSON.stringify(questions));
+                //res.end(questions[0].value);
+     
+                bind.toFile('./FRONTEND/search.html', 
+                	{
+                		domande : questions,
+                	},
+                	function (data) {
+                		res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+                	}
+                );
                 console.log(questions);
             });
          }
@@ -151,9 +199,8 @@ app.get('/isee', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
-                bind.toFile('./FRONTEND/search.tpl', 
+                bind.toFile('./FRONTEND/search.html', 
                 	{
-
                 		domande : questions
                 	},
                 	function (data) {
@@ -174,9 +221,9 @@ app.get('/piano', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
-                bind.toFile('./FRONTEND/search.tpl', 
+                bind.toFile('./FRONTEND/search.html', 
                 	{
-                		domanda1 : questions[0].value
+                		domande : questions
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -200,10 +247,20 @@ app.get('/risposta', function(req, res) {
 				console.log(err);
 			}
 			// Ciclo
-			// da modificare
+			// da modificarean
 			for (var i = 0; i < questions.length; i++) {
 				if (questions[i].nId == id) {
-					res.end(questions[i].answer);
+					//res.end(questions[i].answer);
+					// rimando alla pagina della risposta
+					bind.toFile('./FRONTEND/answer.html',
+					{
+						answer : questions[i].answer
+					},
+					function(data) {
+						res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+					}
+					);
 				}
 			} 
 		});
@@ -216,7 +273,16 @@ app.get('/risposta', function(req, res) {
 			}
 			for (var i = 0; i < questions.length; i++) {
 				if (questions[i].nId == id) {
-					res.end(questions[i].answer);
+					// rimando alla pagina della risposta
+					bind.toFile('./FRONTEND/answer.html',
+					{
+						answer : questions[i].answer
+					},
+					function(data) {
+						res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+					}
+					);
 				}
 			}
 		});
@@ -227,9 +293,18 @@ app.get('/risposta', function(req, res) {
 			if (err) {
 				console.log(err);
 			}
-			for (var i = 0; i < question.length; i++) {
+			for (var i = 0; i < questions.length; i++) {
 				if (questions[i].nId == id) {
-					res.end(questions[i].answer);
+					// rimando alla pagina della risposta
+					bind.toFile('./FRONTEND/answer.html',
+					{
+						answer : questions[i].answer
+					},
+					function(data) {
+						res.writeHead(200, {'Content-Type': 'text/html'});
+            			res.end(data);
+					}
+					);
 				}
 			}
 		});
