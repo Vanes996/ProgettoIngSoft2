@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html>
-<head>
-	<title>Search</title>
-	<style>
+   <head>
+      <meta charset="utf-8">
+       	<style>
 		a:color {
 			color:black;
 		}
@@ -12,17 +12,53 @@
 		a {
 			font-size: 30px;
 			text-decoration: none;
-		
-		}
+            }
+        img {    
+            padding: 5px;    
+            }
+        img:hover {    
+            box-shadow: 0 0 2px 1px #991640;
+            }
+
+
+
+            div.container1 {    
+                display: block;    
+                margin: auto;    
+                width: 50%;    
+                padding: 10px;    
+                text-align: center;
+            }
+
+
+            div.bottompage{
+                position: absolute;    
+                bottom: 0;
+            }
+
+
+            .bigtext {    
+                height:400px;
+            }
 	</style>
-</head>
-<body>
-	<img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="xdddddddd">
-	<br>
-	<br>
-	(:domande ~ 
-		<a href="risposta?id=[:nId:]&topic=[:topic:]"> [:value:] </a> 
-		<br>
-	:) 
-</body>
+      <title> Domande Frequenti </title>
+   </head>
+   <body>
+       <a href="home.html">
+           <img width=400px src=http://www.uncap.eu/wp-content/uploads/2015/02/LogoUniTn.png>
+       </a>
+       <p id="topic"> <b></b></p>
+       <div class="container1">
+           <div>	
+               (:domande ~ 		
+               <a href="risposta?id=[:nId:]&topic=[:topic:]"> [:value:] </a> 		
+               <br>	
+               :)
+           </div>       
+           <br><br><br><br><br><br>      
+           <div id="bottompage">
+               <a href="segreteria.html"><p>Non è quello che stavi cercando?</p></a>
+           </div>
+       </div>
+    </body>
 </html>
