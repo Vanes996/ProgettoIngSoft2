@@ -19,13 +19,20 @@
 </head>
 <body>
 
-	<img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="xdddddddd">
+	<img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="xdddddddd"/>
 	<br>
 	<br>
 	<h1> DOMANDE FREQUENTI </h1>
 	(:domande ~ 
-		<a href="risposta?id=[:nId:]&topic=[:topic:]"> [:value:] </a> 
+		<a href="risposta?id=[:nId:]&topic=[:topic:]"> > [:value:] </a> 
 		<br>
 	:) 
+
+
+	<br>
+	<br>
+	 (:if[loggedIn] ~
+        [:then ~ <a href="insertQuestion?"> INSERISCI UNA NUOVA DOMANDA </a> :]
+    :)
 </body>
 </html>
