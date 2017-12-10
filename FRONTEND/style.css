@@ -2,6 +2,8 @@ img.centered {
     display: block;
     margin-left: auto;
     margin-right: auto;
+    width: 400px;
+    height: 400px;
 }
 
 div.container {
@@ -16,8 +18,12 @@ div.container1 {
     text-align: center;
 }
 
-div.bottoni{
-    margin: auto;
-    width: 20%;
-    padding: 10px;
+#bottoni{
+    padding: 1px;
+    display:inline;
+}
+
+div.logga{
+    float:right;
+    margin-top: 0px;
 }
