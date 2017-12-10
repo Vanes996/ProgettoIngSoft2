@@ -22,10 +22,26 @@ var bind = require('bind');
 var ObjectId = require('mongoose').Schema.ObjectId
 
 
-// Quello che sto per fare è un po una porcata a non so come altro fare
 var ISEE_Question = require("./ISEE_Question.js");
 var Laurea_Question = require("./Laurea_Question.js");
 var Piano_Question = require("./Piano_Question.js");
+
+// per la segreteria se vuole aggiungere domande
+var db_user = require("./Users.js");
+
+var bodyParser = require('body-parser');
+var util = require('util');
+
+/* Configure express app to use bodyParser()
+ * to parse body as URL encoded data
+ * (this is how browser POST form data)
+ */
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json());
+
+
+// variabile per il login
+var logged = false;
 
 //handle get req on /question
 app.get('/question', function (req, res) {    
@@ -55,19 +71,6 @@ app.get('/question', function (req, res) {
          // cercare la risposta nel db
          if (ris == "LAUREA") {
             console.log("cercherò nel database le risposte riguardanti la Laurea");
-
-            /*var domanda = new Laurea_Question();
-            domanda.value = "domanda_3";
-            domanda.answer = "risposta_3";
-            domanda.rating = "rating_3";
-            domanda.nId = "3";
-            domanda.topic = "Laurea";
-            domanda.save(function(err) {
-                if (err) {
-                    console.log("errore");
-                }
-                console.log("domanda creata in che collection finirà?");
-            });*/
             Laurea_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -79,6 +82,7 @@ app.get('/question', function (req, res) {
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -91,19 +95,6 @@ app.get('/question', function (req, res) {
          else if (ris == "PIANO") {
 
             console.log("cercherò nel database le risposte riguardanti il PIANO");
-            /*var domanda = new Piano_Question
-            domanda.value = "domanda_1";
-            domanda.answer = "risposta_1";
-            domanda.rating = "rating_1";
-            domanda.nId = "1";
-            domanda.topic = "Piano";
-            domanda.save(function(err) {
-                if (err) {
-                    console.log("errore");
-                }
-                console.log("domanda creata in che collection finirà?");
-            })
-            */
             Piano_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -111,6 +102,7 @@ app.get('/question', function (req, res) {
                  bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -122,18 +114,6 @@ app.get('/question', function (req, res) {
          }
          else if (ris == "ISEE") {
             console.log("cercherò nel database le risposte riguardanti l'ISEE");
-            /*var domanda = new ISEE_Question();
-            domanda.value = "domanda_1";
-            domanda.answer = "risposta_1";
-            domanda.rating = "rating_1";
-            domanda.nId = "1";
-            domanda.topic = "Isee";
-            domanda.save(function(err) {
-                if (err) {
-                    console.log("errore");
-                }
-                console.log("domanda creata in che collection finirà?");
-            })*/
             ISEE_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
@@ -145,6 +125,7 @@ app.get('/question', function (req, res) {
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -179,7 +160,8 @@ app.get('/laurea', function(req, res) {
                 //res.end(questions[0].value);
                 bind.toFile('./FRONTEND/search.html', 
                 	{
-                		domande : questions
+                		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -201,7 +183,8 @@ app.get('/isee', function(req, res) {
                 //res.end(questions[0].value);
                 bind.toFile('./FRONTEND/search.html', 
                 	{
-                		domande : questions
+                		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -223,7 +206,8 @@ app.get('/piano', function(req, res) {
                 //res.end(questions[0].value);
                 bind.toFile('./FRONTEND/search.html', 
                 	{
-                		domande : questions
+                		domande : questions,
+                		loggedIn : logged
                 	},
                 	function (data) {
                 		res.writeHead(200, {'Content-Type': 'text/html'});
@@ -312,6 +296,150 @@ app.get('/risposta', function(req, res) {
 });
 
 
+// LINK PER INSERIRE UNA DOMANDA
+// Problema con gli id 
+// non faccio inserire l'id della domanda
+// prendo l'id piu alto nel db faccio + 1 e gli do quell'id
+app.get('/insertQuestion', function(req, res) {
+	console.log("INSERIRE DOMANDA");
+	bind.toFile('./FRONTEND/insert.html', 
+	{
+
+	},
+	function(data) {
+		res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+	}
+	); 
+});
+
+app.post('/insert', function(req, res) {
+	var d = req.body.question;
+	var a = req.body.answer;
+	var t = req.body.topic;
+
+	var maxId = 0;
+
+	if (t == "Laurea") {
+		Laurea_Question.find(function(err, questions) {
+			maxId = questions.length+1;
+            // ci sarebbe anche da gestire err
+			// Salvol la domanda
+
+            var domanda = new Laurea_Question();
+            domanda.value = d;
+            domanda.answer = a;
+            domanda.rating = "1";
+            domanda.nId = maxId.toString();
+            domanda.topic = "Laurea";
+            domanda.save(function(err) {
+                if (err) {
+                    console.log("errore");
+                }
+                // IN alternativa si puo rimandare alla pagina prima
+                res.end("DOMANDA CREATA");
+            });
+		});
+	}
+
+    if (t == "Isee") {
+        ISEE_Question.find(function(err, questions) {
+            maxId = questions.length+1;
+
+            // Salvol la domanda
+
+            var domanda = new ISEE_Question();
+            domanda.value = d;
+            domanda.answer = a;
+            domanda.rating = "1";
+            domanda.nId = maxId.toString();
+            domanda.topic = "Laurea";
+            domanda.save(function(err) {
+                if (err) {
+                    console.log("errore");
+                }
+                res.end("DOMANDA CREATA");
+            });
+        });
+    }
+
+    if (t == "Piano") {
+        Piano_Question.find(function(err, questions) {
+            maxId = questions.length+1;
+
+            // Salvol la domanda
+
+            var domanda = new Piano_Question();
+            domanda.value = d;
+            domanda.answer = a;
+            domanda.rating = "1";
+            domanda.nId = maxId.toString();
+            domanda.topic = "Piano";
+            domanda.save(function(err) {
+                if (err) {
+                    console.log("errore");
+                }
+                res.end("DOMANDA CREATA");
+            });
+        });
+    }
+
+});
+
+
+// Listen to /login 
+// Apre la form di login
+app.get('/login', function(req, res){
+
+    // INTANTO INSERISCO QUA L'UTENTE PER TESTARE
+    // Luca
+    // test01
+   /*var utente = new db_user();
+    utente.username = "Luca";
+    utente.password = "test01";
+    utente.save(function(err) {
+        if (err) {
+            console.log(err);
+        }
+
+    });*/
+
+
+    bind.toFile('./FRONTEND/login.html', 
+    {
+
+    },
+    function(data) {
+        res.writeHead(200, {'Content-Type': 'text/html'});
+        res.end(data);
+    }    
+
+    );
+});
+
+
+// Prende il nome utente e la password inserite nella form
+// Guarda se c'è nel database
+// In caso mette la variabile login a true
+app.post('/loginForm', function(req, res) {
+    var username = req.body.username;
+    var password = req.body.password;
+     
+    // Guardo se c'è l'utente nel db
+    db_user.find(function(err, users) {
+        if (err) {
+            console.log(err);
+        }
+        console.log("USERS");
+        for (var i = 0; i < users.length; i++) {
+            if (users[i].username == username && users[i].password == password) {
+                logged = true;
+                // DA CAMBIARE
+                res.end("LOGGED IN");
+            }
+        }
+    });
+});
 
 //listen in a specific port
 // Magari dopo si puo pensare di cambiare la porta 
