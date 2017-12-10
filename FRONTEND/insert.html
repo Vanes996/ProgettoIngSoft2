@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Search</title>
+	<meta charset="utf-8">
+	<style >
+		div {
+			display: block;
+		}
+	</style>
+</head>
+<body>
+	<h1> INSERISCI UNA NUOVA DOMANDA </h1>
+	<div class="container1"> 	
+		<form action="http://127.0.0.1:80/insert" method='post'>
+  			<div>
+  				<h2> DOMANDA </h2>
+  				<input type="text" name="question" size="50">
+  			</div>
+  			<div>
+  				<h2> RISPOSTA </h2>
+  				<input type="text" name="answer" size="50">
+  			</div>
+  			<div>
+  				<h2> TOPIC </h2>
+  				<input type="text" name="topic" size="50">
+  			</div>
+  			<br>
+  			<div>
+  				<input type="submit" value="INSERT">
+  			</div>
+		</form>	
+
+	</div>
+</body>
+</html>
