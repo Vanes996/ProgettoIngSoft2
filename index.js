@@ -19,8 +19,6 @@ var dia = apiai('c22a4fe6d883458e8063bc34327996d5');
 //for templates 06/12
 var bind = require('bind');
 
-var ObjectId = require('mongoose').Schema.ObjectId
-
 
 var ISEE_Question = require("./ISEE_Question.js");
 var Laurea_Question = require("./Laurea_Question.js");
@@ -71,13 +69,28 @@ app.get('/question', function (req, res) {
          // cercare la risposta nel db
          if (ris == "LAUREA") {
             console.log("cercherò nel database le risposte riguardanti la Laurea");
+            // Per ordinare le domande in base al rating devo ordinare l'array questions per il rating -------------------------------------------------
             Laurea_Question.find(function(err, questions) {
                 if (err) {
                     console.log(err);
                 }
-                // OK COSI FUNZIA
-                // res.end(JSON.stringify(questions));
-                //res.end(questions[0].value);
+
+                // Qua devo ordinare l'array in ordine discendente
+                // Fare questo pezzo per tutte le parti dove prendo question
+                // sarebe piu comodo fare una funzione ma non so se passa i parametri giusti o copie
+                var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+                // fine ordinamento
+
      
                 bind.toFile('./FRONTEND/search.html', 
                 	{
