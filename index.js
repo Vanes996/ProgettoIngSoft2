@@ -112,7 +112,21 @@ app.get('/question', function (req, res) {
                 if (err) {
                     console.log(err);
                 }
-                 bind.toFile('./FRONTEND/search.html', 
+
+                var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+                
+
+                bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -135,6 +149,18 @@ app.get('/question', function (req, res) {
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
      
+     			var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
@@ -171,6 +197,19 @@ app.get('/laurea', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
+
+                var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
@@ -194,6 +233,19 @@ app.get('/isee', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
+
+                var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
@@ -217,6 +269,19 @@ app.get('/piano', function(req, res) {
                 // OK COSI FUNZIA
                 // res.end(JSON.stringify(questions));
                 //res.end(questions[0].value);
+
+                var f = questions.length-1;
+                for (var c = 0; c < questions.length; c++) {
+                    for (var i=0; i < f; i++) {
+                        if (parseInt(questions[i].rating) < parseInt(questions[i+1].rating)) {
+                            var copia = questions[i];
+                            questions[i] = questions[i+1];
+                            questions[i+1] = copia;
+                        }
+                    }
+                    f = f - 1;
+                }
+
                 bind.toFile('./FRONTEND/search.html', 
                 	{
                 		domande : questions,
@@ -249,9 +314,29 @@ app.get('/risposta', function(req, res) {
 				if (questions[i].nId == id) {
 					//res.end(questions[i].answer);
 					// rimando alla pagina della risposta
+
+					// AGGIORNAMENTO RATING
+					var realId = questions[i].id;
+
+					Laurea_Question.findById(realId, function(err, question) {
+						var ratingN = parseInt(question.rating);
+						ratingN = ratingN + 1;
+						console.log("RATING ATTUALE : ", + ratingN);
+						question.rating = ratingN.toString();
+
+						question.save(function (err) {
+               				 if (err) { 
+               				 	console.log(err);
+               				 }
+               				 console.log("UPDATED");
+            			});
+					});
+					// FINE AGGIORNAMENTO RATING
+
 					bind.toFile('./FRONTEND/answer.html',
 					{
-						answer : questions[i].answer
+						answer : questions[i].answer,
+						screenshot : questions[i].screen
 					},
 					function(data) {
 						res.writeHead(200, {'Content-Type': 'text/html'});
@@ -271,9 +356,29 @@ app.get('/risposta', function(req, res) {
 			for (var i = 0; i < questions.length; i++) {
 				if (questions[i].nId == id) {
 					// rimando alla pagina della risposta
+						// AGGIORNAMENTO RATING
+					var realId = questions[i].id;
+
+					ISEE_Question.findById(realId, function(err, question) {
+						var ratingN = parseInt(question.rating);
+						ratingN = ratingN + 1;
+						console.log("RATING ATTUALE : ", + ratingN);
+						question.rating = ratingN.toString();
+
+						question.save(function (err) {
+               				 if (err) { 
+               				 	console.log(err);
+               				 }
+               				 console.log("UPDATED");
+            			});
+					});
+					// FINE AGGIORNAMENTO RATING
+
+
 					bind.toFile('./FRONTEND/answer.html',
 					{
-						answer : questions[i].answer
+						answer : questions[i].answer,
+						screenshot : questions[i].screen
 					},
 					function(data) {
 						res.writeHead(200, {'Content-Type': 'text/html'});
@@ -292,10 +397,30 @@ app.get('/risposta', function(req, res) {
 			}
 			for (var i = 0; i < questions.length; i++) {
 				if (questions[i].nId == id) {
+
+					// AGGIORNAMENTO RATING
+					var realId = questions[i].id;
+
+					Piano_Question.findById(realId, function(err, question) {
+						var ratingN = parseInt(question.rating);
+						ratingN = ratingN + 1;
+						console.log("RATING ATTUALE : ", + ratingN);
+						question.rating = ratingN.toString();
+
+						question.save(function (err) {
+               				 if (err) { 
+               				 	console.log(err);
+               				 }
+               				 console.log("UPDATED");
+            			});
+					});
+					// FINE AGGIORNAMENTO RATING
+
 					// rimando alla pagina della risposta
 					bind.toFile('./FRONTEND/answer.html',
 					{
-						answer : questions[i].answer
+						answer : questions[i].answer,
+						screenshot : questions[i].screen
 					},
 					function(data) {
 						res.writeHead(200, {'Content-Type': 'text/html'});
