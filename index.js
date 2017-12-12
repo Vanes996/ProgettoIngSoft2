@@ -335,6 +335,7 @@ app.get('/risposta', function(req, res) {
 
 					bind.toFile('./FRONTEND/answer.html',
 					{
+						domanda : questions[i].value,
 						answer : questions[i].answer,
 						screenshot : questions[i].screen
 					},
