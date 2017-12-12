@@ -19,7 +19,7 @@ and open the template in the editor.
     <body>
         <div class="container-fluid">
             <div class="row">
-                <img src="../Img/logo.jpg" alt="Home page" height="100" width="200" />
+                <img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="Home page" height="200" width="200" />
                 <div class="col-md-4 ">
                     <h1 bottom="50px">Topic: Topic scelto</h1>
                 </div>
@@ -37,12 +37,19 @@ and open the template in the editor.
             <br>
             <div class="row">
                 <ol>
-                    <li> Domanda 1</li>
-                    <li> Domanda 2</li>
+                    (:domande ~ 		
+                    <a href="risposta?id=[:nId:]&topic=[:topic:]"> > [:value:] </a> 		
+                    <br>	
+                    :) 	
+                    <br>	
+                    <br>	 
+                    (:if[loggedIn] ~        
+                    [:then ~ <a href="insertQuestion?"> INSERISCI UNA NUOVA DOMANDA </a> :]    
+                    :)
                 </ol>
             </div>
-            <p> ... Collegare al database </p>
             
-            <h4>Non è quello che stavi cercando?</h4>
+            <h4>Non è quello che stavi cercando?</h4> <!-- linkare a feedback.html-->
+        </div>
     </body>
 </html>

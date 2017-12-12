@@ -20,6 +20,11 @@ and open the template in the editor.
                 .btn-outline-secondary{
                     border: none;
                 }
+            
+                #bottoni{ /*per metter i topic in linea senza vanno uno sotto l'altro*/
+                    padding: 1px;
+                    display:inline;
+                }
 
                 .justify-content-center{
                     margin: auto;
@@ -2381,9 +2386,11 @@ and open the template in the editor.
                 </div>
                 <div class="col-md-3 col-md-auto">
                     <div class="col-md-auto">
-                        <ul class="navbar-right">
-                            <button class="btn btn-outline-secondary">Login</button>
-                            <button class="btn btn-outline-secondary">Informazioni</button>
+                        <ul class="navbar-right">                            
+                            <!--<button class="btn btn-outline-secondary">Informazioni</button>cosa dovrebbe fare sto bottone?-->
+                             <form action="http://127.0.0.1:80/login" method='get'>
+                                 <input class="btn btn-outline-secondary" type="submit" value="Login">        
+                            </form>
                         </ul>
                     </div>
                 </div>
@@ -2393,13 +2400,13 @@ and open the template in the editor.
 
         <div class="container">
             <div class="row justify-content-center">
-                <img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="Home Page" height=300" width="300" />
+                <img src="https://www.biblioteca.unitn.it/sites/www.biblioteca.unitn.it/modules/asia_opengraphmeta/images/logo_fb.png" alt="Home Page" height="300" width="300" />
 
-                <form class="form-inline" action="../JSP/Ricerca.jsp" method="get">
+                <form class="form-inline" action="http://127.0.0.1:80/question" method="get"><!--"../JSP/Ricerca.jsp" cosa fa?-->
                     <div class="input-group add-on">
                         <input class="form-control" placeholder="Cerca" name="srch-term" id="srch-term" type="text" srch-term="srch-term">
                         <div class="input-group-btn">
-                        <button class="btn btn-outline-success" disabled="true"><i class="fa-microphone"></i></button>
+                        <input class="btn btn-outline-success" type="submit"><!--<i class="fa-microphone"></i>-->
                         </div>                        
                     </div>
                 </form>
@@ -2409,10 +2416,19 @@ and open the template in the editor.
         <div class="container">
             <div class="row justify-content-center">
                 <div class="col-md-12">
-                    <button class="most-srch-topic" name="topic1">Topic1</button>
+                    <!--<button class="most-srch-topic" name="topic1">Topic1</button>
                     <button class="most-srch-topic" name="topic2">Topic2</button>
                     <button class="most-srch-topic" name="topic3">Topic3</button>
-                    <button class="most-srch-topic" name="topic4">Topic4</button>
+                    <button class="most-srch-topic" name="topic4">Topic4</button>-->
+                    <form id="bottoni" action="http://127.0.0.1:80/laurea" method='get'>
+                        <input class="most-srch-topic" type="submit" value="LAUREA">
+                    </form>
+                    <form id="bottoni" action="http://127.0.0.1:80/isee" method='get'>
+                        <input class="most-srch-topic" type="submit" value="ISEE">
+                    </form>
+                    <form id="bottoni" action="http://127.0.0.1:80/piano" method='get'>
+                        <input class="most-srch-topic" type="submit" value="PIANO DI STUDIO">
+                    </form>	
                 </div>
                 <ul>
                     <li>Novità 1</li>
