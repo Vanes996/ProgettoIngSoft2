@@ -92,7 +92,7 @@ app.get('/question', function (req, res) {
                 // fine ordinamento
 
      
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -126,7 +126,7 @@ app.get('/question', function (req, res) {
                 }
                 
 
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -161,7 +161,7 @@ app.get('/question', function (req, res) {
                     f = f - 1;
                 }
 
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -210,7 +210,7 @@ app.get('/laurea', function(req, res) {
                     f = f - 1;
                 }
 
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -246,7 +246,7 @@ app.get('/isee', function(req, res) {
                     f = f - 1;
                 }
 
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -282,7 +282,7 @@ app.get('/piano', function(req, res) {
                     f = f - 1;
                 }
 
-                bind.toFile('./FRONTEND/search.html', 
+                bind.toFile('./FRONTEND/TopicScelto.html', //search
                 	{
                 		domande : questions,
                 		loggedIn : logged
@@ -333,7 +333,7 @@ app.get('/risposta', function(req, res) {
 					});
 					// FINE AGGIORNAMENTO RATING
 
-					bind.toFile('./FRONTEND/answer.html',
+					bind.toFile('./FRONTEND/Tipologia1.html', //answer
 					{
 						domanda : questions[i].value,
 						answer : questions[i].answer,
@@ -376,8 +376,9 @@ app.get('/risposta', function(req, res) {
 					// FINE AGGIORNAMENTO RATING
 
 
-					bind.toFile('./FRONTEND/answer.html',
+					bind.toFile('./FRONTEND/Tipologia1.html', //answer
 					{
+						domanda : questions[i].value,
 						answer : questions[i].answer,
 						screenshot : questions[i].screen
 					},
@@ -418,8 +419,9 @@ app.get('/risposta', function(req, res) {
 					// FINE AGGIORNAMENTO RATING
 
 					// rimando alla pagina della risposta
-					bind.toFile('./FRONTEND/answer.html',
+					bind.toFile('./FRONTEND/Tipologia1.html', //answer
 					{
+						domanda : questions[i].value,
 						answer : questions[i].answer,
 						screenshot : questions[i].screen
 					},
