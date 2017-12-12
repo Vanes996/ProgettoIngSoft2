@@ -21,3 +21,33 @@ div.bottoni{
     width: 20%;
     padding: 10px;
 }
+
+img.centered {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 400px;
+    height: 400px;
+}
+
+div.container {
+	display: block;
+}
+
+div.container1 {
+    display: block;
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+    text-align: center;
+}
+
+#bottoni{
+    padding: 1px;
+    display:inline;
+}
+
+div.logga{
+    float:right;
+    margin-top: 0px;
+}

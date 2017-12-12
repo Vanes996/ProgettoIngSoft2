@@ -26,3 +26,5 @@ Rating è il numero di click fatto su quella domanda (aumenta ogni volta che vie
 
 Non so perche non vada a capo spero si capisca comunque
 
+
+Bisogna inserire tutte le domande e le risposte nel database, nel modificare le domande e risposte nel databse non si possono metteri i doppi apici e a quanto sembra neanche lasciare spazi vuoti, se bisogna andare a capo usate <br> come nell'html

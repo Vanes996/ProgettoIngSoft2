@@ -28,3 +28,42 @@
 </body>
 </html>
 
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+
+	<div class="container">
+		<img class="centered" src="./img/logo_400x400.jpg">
+	</div>
+	
+	<div class="logga">
+        <form action="http://127.0.0.1:80/login" method='get'>
+            <input type="submit" value="Login">
+        </form>
+    </div>
+    
+	<div class="container1"> 	
+		<form action="http://127.0.0.1:80/question" method='get'>
+  			<input type="text" name="questionValue" size="50">
+  			<input type="submit" value="send">
+		</form>	
+
+	</div>
+    <div class="container">
+		<form id="bottoni" action="http://127.0.0.1:80/laurea" method='get'>
+			<input type="submit" value="LAUREA">
+		</form>
+		<form id="bottoni" action="http://127.0.0.1:80/isee" method='get'>
+			<input type="submit" value="ISEE">
+		</form>
+		<form id="bottoni" action="http://127.0.0.1:80/piano" method='get'>
+			<input type="submit" value="PIANO DI STUDIO">
+		</form>	
+    </div>
+
+</body>
+</html>
